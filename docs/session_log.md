@@ -25,3 +25,11 @@ not captured in the filename is recorded here.
 **Total rows: 8349 across 8 sessions**
 
 ---
+## Model Training
+- Date: 27 March 2026
+- Platform: Edge Impulse
+- Training windows: 541
+- Test windows: 129
+- Clusters: 8
+- Features: LightMean (avg, min, max, stdev) + TempMean (avg, stdev)
+- Deployment: Arduino library exported and uploaded to Nano 33 IoT
