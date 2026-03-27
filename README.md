@@ -61,6 +61,44 @@ flagged as anomaly -- no anomaly examples needed during training.
 - ~1200 rows per session at 200ms sample interval
 - Each session saved as a separate CSV named by condition and timestamp
 
+## Edge Impulse Pipeline
+
+- Platform: Edge Impulse (edgeimpulse.com)
+- Data uploaded via CSV Wizard as time series data
+- Sample frequency: 5Hz (200ms intervals)
+- Window size: 2000ms (10 readings per window)
+- Processing block: Flatten (Average, Minimum, Maximum, Standard Deviation)
+- Learning block: Anomaly Detection (K-Means)
+- Clusters: 8
+- Training samples: 541 windows
+- Test samples: 129 windows
+- All data labelled as: normal
+
+## Deployment
+
+- Model exported from Edge Impulse as Arduino library
+- Library installed via Arduino IDE
+- Inference sketch uploaded to Arduino Nano 33 IoT
+- Anomaly threshold tuned by observing Serial Monitor scores
+- Final threshold: [fill in your value]
+- Board runs fully standalone after deployment -- no laptop needed
+
+## Anomaly Detection Logic
+
+K-Means builds 8 cluster centres from normal training data.
+At inference time, the model extracts 6 features from each
+2-second window and calculates the distance to the nearest
+cluster centre. That distance is the anomaly score.
+
+- Score below threshold -- NORMAL -- LEDs blink slowly
+- Score above threshold -- ANOMALY -- LEDs blink fast
+
+Tested anomaly conditions:
+- Covering LDR with hand (sudden darkness)
+- Holding warm object near thermistor (sudden heat)
+- Switching room lights off suddenly
+
+
 ## Repository Structure
 ```
 iot-anomaly-detector/
