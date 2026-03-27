@@ -20,3 +20,14 @@
 - LEDs are forced OFF during data collection to prevent light contamination on LDR
 - Thermistor uses Steinhart-Hart equation (B parameter method) for ADC to Celsius conversion
 - Series resistor value must match SERIES_RESISTOR constant in firmware (default 10000)
+
+## Known Compatibility Issue
+Edge Impulse Arduino library (v1.0.1) requires a manual fix for
+Arduino SAMD boards (Cortex-M0+). In the installed library file:
+
+  src/edge-impulse-sdk/CMSIS/DSP/Include/arm_math_types.h
+
+The condition `#elif defined (__GNUC_PYTHON__)` must be changed to
+`#elif defined (__GNUC_PYTHON__) || defined (__GNUC__)`
+and a software `__SSAT` macro added for Cortex-M0+ compatibility.
+This must be re-applied each time the library is reinstalled.
