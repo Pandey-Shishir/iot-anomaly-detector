@@ -72,15 +72,6 @@ iot-anomaly-detector/
 └── docs/                       -- Session log and project notes
 ```
 
-## Project Status
-- [x] Hardware assembled and tested
-- [x] Data collection firmware written
-- [x] Python capture script written
-- [ ] Data collection in progress (target: 10+ sessions)
-- [ ] Edge Impulse K-Means training
-- [ ] Threshold tuning and testing
-- [ ] Final deployment
-
 ## Tools and Technologies
 - Arduino Nano 33 IoT (SAMD21 ARM Cortex-M0+)
 - Edge Impulse (K-Means anomaly detection block)
