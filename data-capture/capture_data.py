@@ -4,6 +4,18 @@ capture_data.py
 Captures sensor data from Arduino Nano 33 IoT for exactly 4 minutes
 of ACTIVE recording time and saves it as a CSV file.
 
+SETUP -- DO THIS BEFORE RUNNING:
+    1. Open firmware/DataCollection/DataCollection.ino in Arduino IDE
+    2. Upload it to the Arduino Nano 33 IoT
+    3. Close Arduino IDE and Serial Monitor completely
+    4. Run this script with the Arduino still connected via USB
+
+    The Arduino must have DataCollection.ino uploaded and running before
+    this script is started. The Arduino streams sensor data over USB
+    continuously and this script receives and saves it. Both must be
+    active at the same time -- the Arduino powered via USB, this script
+    running on the laptop.
+
 USAGE:
     python capture_data.py
 
@@ -32,6 +44,8 @@ NOTES:
     - Change PORT below to match your board
     - Check: Device Manager -> Ports (COM & LPT) -> Arduino Nano 33 IoT
     - Arduino IDE and Serial Monitor must be fully closed before running
+    - The Arduino does not need to be re-uploaded between sessions,
+      only when the firmware code itself changes
 """
 
 import serial
