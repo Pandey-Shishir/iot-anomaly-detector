@@ -17,11 +17,31 @@ model deployed directly on the microcontroller.
 | LED 3 | D4 |
 
 ## How It Works
-1. Arduino streams LightMean and TempMean over USB serial at 200ms intervals
-2. Python script captures sessions as timestamped CSV files
-3. CSV files uploaded to Edge Impulse and K-Means model trained on normal data only
-4. Trained model deployed back onto Arduino as a TinyML library
-5. On-device inference runs standalone -- LEDs blink slow (normal) or fast (anomaly)
+
+### Step 1 -- Upload firmware to Arduino
+Open `firmware/DataCollection/DataCollection.ino` in Arduino IDE and upload
+it to the Arduino Nano 33 IoT. Once uploaded, the Arduino immediately starts
+streaming sensor readings over USB serial. Close Arduino IDE and Serial Monitor
+completely before moving to Step 2.
+
+### Step 2 -- Run the Python capture script
+With the Arduino still connected via USB, run `data-capture/capture_data.py`
+on your laptop. The script connects to the Arduino over serial, verifies both
+sensors are responding, then asks you to describe the session condition before
+starting a 4 minute recording.
+
+These two must run together -- the Arduino streams data continuously over USB
+and the Python script receives and saves it. The Arduino does not need to be
+re-uploaded between sessions, only between code changes.
+
+### Step 3 -- Train on Edge Impulse
+Upload collected CSV files to Edge Impulse using the CSV Wizard. Train a
+K-Means anomaly detection model on normal data only.
+
+### Step 4 -- Deploy
+Export the trained model from Edge Impulse as an Arduino library, then upload
+`deployment/SmartAnomalyDetector/Smart_Anomaly_Detector.ino` to the Arduino.
+The board then runs standalone -- no laptop needed.
 
 ## Why K-Means Instead of a Neural Network
 An earlier version of this project used a supervised neural network classifier
