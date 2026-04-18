@@ -80,7 +80,6 @@ flagged as anomaly -- no anomaly examples needed during training.
 - Library installed via Arduino IDE
 - Inference sketch uploaded to Arduino Nano 33 IoT
 - Anomaly threshold tuned by observing Serial Monitor scores
-- Final threshold: [fill in your value]
 - Board runs fully standalone after deployment -- no laptop needed
 
 ## Anomaly Detection Logic
